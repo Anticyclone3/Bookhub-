@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background: #f8f9fa;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: left;
+        }
+        nav a {
+            color: black;
+            text-decoration: none;
+            margin: 0 1.5rem;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.2s;
+        }
+        nav a:hover {
+            color: #764ba2;
+        }
+        .contact-container {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(102,126,234,0.12);
+            max-width: 400px;
+            margin: 3rem auto;
+            padding: 2rem;
+            text-align: center;
+        }
+        .contact-container h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+        }
+        .contact-container input, .contact-container textarea {
+            width: 90%;
+            padding: 0.7rem;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+        .contact-container button {
+            background: #667eea;
+            color: #fff;
+            border: none;
+            padding: 0.7rem 2rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .contact-container button:hover {
+            background: #764ba2;
+        }
+        .success-message {
+            color: #22bb33;
+            font-weight: bold;
+            margin-top: 1rem;
+            display: none;
+        }
+        footer {
+            background: #f8f9fa;
+            color: #333;
+            text-align: center;
+            padding: 1rem 0;
+            font-size: 1rem;
+            margin-top: 2rem;
+            letter-spacing: 1px;
+            box-shadow: 0 -2px 12px rgba(102,126,234,0.10);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">📚 BookHub</div>
+        <a href="Claude Book.html">Home</a>
+        <a href="Cart.html">Cart</a>
+        <a href="Account.html">Account</a>
+        <a href="Books.html">Browse Books</a>
+        <a href="Selling.html">Sell Books</a>
+        <a href="Contact.html">Contact</a>
+    </nav>
+    <div class="contact-container">
+        <h2>Contact Us</h2>
+        <form id="contactForm">
+            <input type="text" id="name" placeholder="Your Name" required><br>
+            <input type="email" id="email" placeholder="Your Email" required><br>
+            <textarea id="message" rows="4" placeholder="Your Message" required></textarea><br>
+            <button type="submit">Send Message</button>
+        </form>
+        <div class="success-message" id="successMsg">Contacted successfully!</div>
+    </div>
+    <footer>
+        <p>&copy; 2023 Online Books Resume Store</p>
+    </footer>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('successMsg').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('successMsg').innerHTML = 'Contacted successfully! <br><img src="https://media.giphy.com/media/111ebonMs90YLu/giphy.gif" alt="Success" style="width:60px;vertical-align:middle;">';
+                document.getElementById('successMsg').style.display = 'none';
+                document.getElementById('successMsg').innerHTML = 'Contacted successfully!';
+                document.getElementById('contactForm').reset();
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

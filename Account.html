@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Account - BookHub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #667eea;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      background-color: #f4f4f4;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    nav a {
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+      color: #4a00e0;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 2rem;
+      color: #fff;
+    }
+
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+
+    .stat-box {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-box h3 {
+      margin-bottom: 10px;
+      color: #4a00e0;
+    }
+
+    #cartItemsSection {
+      background-color: #fff;
+      margin: 2rem;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #cartItemsSection h3 {
+      margin-bottom: 1rem;
+      color: #4a00e0;
+    }
+
+    #cartItems li {
+      margin: 8px 0;
+    }
+
+    footer {
+      margin-top: 5rem;
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 1rem;
+      background-color: #f4f4f4;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      nav {
+        justify-content: center;
+      }
+
+      .logo {
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">📚 BookHub</div>
+    <nav>
+      <a href="Claude Book.html">Home</a>
+      <a href="Books.html">Browse Books</a>
+      <a href="Cart.html">Cart</a>
+      <a href="Account.html" class="active">My Account</a>
+      <a href="Selling.html">Sell Book</a>
+      <a href="Resume.html">Resume</a>
+      <a href="Contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <h2>Welcome, <span id="userName">Guest</span>!</h2>
+
+  <div class="stats-container">
+    <div class="stat-box">
+      <h3>Total Books Purchased</h3>
+      <p id="totalBooks">0</p>
+    </div>
+    <div class="stat-box">
+      <h3>Total Spent</h3>
+      <p id="totalSpent">$0</p>
+    </div>
+    <div class="stat-box">
+      <h3>Books You’ve Sold</h3>
+      <p id="booksSold">0</p>
+    </div>
+    <div class="stat-box">
+      <h3>Uploaded Resume</h3>
+      <p id="uploadedResume">None</p>
+    </div>
+  </div>
+
+  <div id="cartItemsSection">
+    <h3>Cart Items</h3>
+    <ul id="cartItems">Loading cart...</ul>
+  </div>
+
+  <div style="margin: 2rem; background: #fff; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+  <h3 style="color: #4a00e0;">Update Your Info</h3>
+  
+  <label for="newName">Change Name:</label>
+  <input type="text" id="newName" placeholder="Enter new name" style="padding: 0.5rem; margin: 0.5rem 0; width: 200px;" />
+  <button onclick="changeName()" style="padding: 0.5rem 1rem; background: #4a00e0; color: white; border: none; border-radius: 5px;">Update</button>
+
+  <br><br>
+
+  <button onclick="logoutUser()" style="padding: 0.5rem 1rem; background: #e74c3c; color: white; border: none; border-radius: 5px;">Log Out</button>
+</div>
+
+
+  <footer>
+    <p>&copy; 2025 Online Books Resume Store | <strong>BookHub</strong></p>
+  </footer>
+
+  <script>
+    // Show user name
+    const userName = localStorage.getItem('userName');
+    document.getElementById('userName').innerText = userName ? userName : 'Guest';
+
+    localStorage.setItem('userName', 'Arya');
+    document.getElementById('userName').innerText = 'Arya';
+
+    // Load stats
+    const totalBooksPurchased = Number(localStorage.getItem('totalBooksPurchased')) || 0;
+    const totalSpent = Number(localStorage.getItem('totalSpent')) || 0;
+    const resumePath = localStorage.getItem('resumePath');
+    const managedBooks = JSON.parse(localStorage.getItem('managedBooks')) || [];
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Animate stats
+    function animateStat(id, end, prefix = '', duration = 1200) {
+      const el = document.getElementById(id);
+      let start = 0;
+      const step = Math.ceil(end / (duration / 30));
+      const timer = setInterval(() => {
+        start += step;
+        if (start >= end) {
+          el.innerText = prefix + end;
+          clearInterval(timer);
+        } else {
+          el.innerText = prefix + start;
+        }
+      }, 30);
+    }
+
+    animateStat('totalBooks', totalBooksPurchased);
+    animateStat('totalSpent', totalSpent, '$');
+    animateStat('booksSold', managedBooks.length);
+
+    // Resume display
+    document.getElementById('uploadedResume').innerText = resumePath ? "Uploaded ✅" : "None";
+
+    // Show Cart Items
+    const cartList = document.getElementById('cartItems');
+    if (cartItems.length > 0) {
+      cartList.innerHTML = cartItems
+        .map(item => `<li><strong>${item.title}</strong> - $${item.price}</li>`)
+        .join('');
+    } else {
+      cartList.innerHTML = "<li>No items in cart.</li>";
+    }
+       
+
+    function changeName() {
+  const newName = document.getElementById('newName').value.trim();
+  if (newName) {
+    localStorage.setItem('userName', newName);
+    document.getElementById('userName').innerText = newName;
+    alert("Name updated successfully!");
+    document.getElementById('newName').value = '';
+  } else {
+    alert("Please enter a valid name.");
+  }
+}
+
+function logoutUser() {
+  const confirmLogout = confirm("Are you sure you want to log out?");
+  if (confirmLogout) {
+    localStorage.clear();
+    alert("Logged out successfully!");
+    location.reload();
+  }
+}
+
+    // Update Cart Items
+    function updateCart() {
+        const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartItemsList = document.getElementById('cartItems');
+        cartItemsList.innerHTML = '';
+        if (cartItems.length === 0) {
+            cartItemsList.innerHTML = '<li>No items in cart.</li>';
+        } else {
+            cartItems.forEach(item => {
+                cartItemsList.innerHTML += `<li><strong>${item.title}</strong> - $${item.price}</li>`;
+            });
+        }
+    }
+
+
+    // Initial load
+    updateCart();
+displayManageBooks();
+displaySellBooks();
+updateCart();
+handleSignup();
+handleLogin();
+updateAccountStats();
+  </script>
+</body>
+</html>

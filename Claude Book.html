@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookHub - Books & Resume Store</title>
+    <link rel="stylesheet" href="stylee.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">📚 BookHub</div>
+            <ul class="nav-links">
+                <li><a onclick="showPage('home')">Home</a></li>
+                <li><a href="Books.html" onclick="showPage('books')">Books</a></li>
+                <li><a href="Resume.html" onclick="showPage('resume')">Resume</a></li>
+                <li><a href="Selling.html" onclick="showPage('selling')">Buy/Sell Books</a></li>
+                <li><a href="Cart.html" onclick="showPage('cart')">Cart</a></li>
+                <li><a href="Contact.html" onclick="showPage('contact')">Contact Us</a></li>
+            </ul>
+            <div class="user-section">
+                <div id="authButtons">
+                    <a class="btn btn-secondary" href="Login.html">Login</a>
+                    <a class="btn btn-primary" href="Sign.html">Sign Up</a>
+                </div>
+                <div id="userMenu" style="display: none;">
+                    <span id="welcomeUser"></span>
+                    <a class="btn btn-secondary" href="Account.html">Account</a>
+                    <a class="btn btn-danger" onclick="logout()">Logout</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- Alert Messages -->
+            <div id="alertContainer"></div>
+
+            <!-- Home Page -->
+            <div id="home" class="page active">
+                <section class="hero">
+                    <h1>Welcome to BookHub</h1>
+                    <p>Your one-stop destination for books and professional resume services</p>
+                    <a class="btn btn-primary" href="Books.html">Browse Books</a>
+                </section>
+
+                <section class="features">
+                    <div class="feature-card">
+                        <div class="feature-icon">📚</div>
+                        <h3>Extensive Book Collection</h3>
+                        <p>Browse through thousands of books across various genres and categories</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📄</div>
+                        <h3>Resume Services</h3>
+                        <p>Upload and manage your professional resumes with ease</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🛒</div>
+                        <h3>Easy Shopping</h3>
+                        <p>Add books to your cart and enjoy a seamless shopping experience</p>
+                    </div>
+                </section>
+            </div>
+
+
+    <footer>
+        <p>&copy; 2023 Online Books Resume Store</p>
+    </footer>
+
+<!-- JavaScript Files -->
+<script src="Java2.js"></script>
+</body>
+</html>
+
+

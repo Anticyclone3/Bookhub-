@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<style>
+
+    Body {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: rgb(46, 44, 44);
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+     /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            max-width: 1500px;
+            max-height: 300px;
+        }
+
+        
+    nav {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        color: rgb(84, 80, 80)
+    }
+
+    h1{
+        color: rgb(161, 63, 63);
+        font-size: 2.5rem;
+        text-align: center;
+        margin: 0;
+    }
+
+    .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: left;
+        }
+
+    /* Books Page */
+    .books-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .books-header h2 {
+        font-size: 2rem;
+        color: #333;
+    }
+
+    .search-bar {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .search-bar input, .search-bar select {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        width: 200px;
+    }
+
+    .books-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .book-card {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 1rem;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .book-card h4 {
+        margin-bottom: 0.5rem;
+    }
+
+    .book-card p {
+        margin-bottom: 0.5rem;
+    }
+
+    .book-card button {
+        padding: 10px;
+        background-color: #667eea;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .book-card button:hover {
+        background-color: #764ba2;
+    }
+
+    .book-card img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        margin-top: 1rem;
+    }
+
+    footer {
+        background: #f8f9fa;
+        padding: 1rem 0;
+        text-align: center;
+        border-top: 1px solid #eee;
+        margin-top: 2rem;
+        max-width: 1500px;
+        max-height: 300px;
+    }
+
+    footer p {
+        color: black;
+        margin: 0;
+    }
+</style>
+<body>
+    <!-- Books Page -->
+     <header>
+        <h1>Our Books</h1>
+        <div class="logo">📚 BookHub</div>
+         <nav>
+        <a href="Claude Book.html">Home</a>
+        <a href="Cart.html">Cart</a>
+        <a href="Sign.html">Sign In</a>
+        <a href="Books.html">Browse Books</a>
+        <a href="Selling.html">Sell Books</a>
+        <a href="Contact.html">Contact</a>
+    </nav>
+     </header>
+            <div id="books" class="page">
+                <div class="books-header">
+                    <h2>Browse Our Collection</h2>
+                    <div class="search-bar">
+                        <input type="text" id="bookSearch" placeholder="Search books..." onkeyup="filterBooks()">
+                        <select id="categoryFilter" onchange="filterBooks()">
+                            <option value="">All Categories</option>
+                            <option value="Fiction">Fiction</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Business">Business</option>
+                            <option value="Self-Help">Self-Help</option>
+                            <option value="Romance">Romance</option>
+                            <option value="Philosophy">Philosophy</option>
+                            <option value="History">History</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="books-grid" id="booksGrid"></div>
+            </div>
+
+             <footer>
+        <p>&copy; 2023 Online Books Resume Store</p>
+    </footer>
+
+<!-- JavaScript Files -->
+<script src="Java2.js"></script>
+<script>
+    // Default books (these will always be present)
+    const defaultBooks = [
+        { id: 1, title: "The Alchemist", author: "Paulo Coelho", price: 10, category: "Fiction", image: "c:\\Users\\HP\\Desktop\\Images\\OIP.jpg" },
+        { id: 2, title: "Clean Code", author: "Robert Martin", price: 25, category: "Technology", image: "c:\\Users\\HP\\Desktop\\Images\\Perkin2.jpg" },
+        { id: 3, title: "Rich Dad Poor Dad", author: "Robert Kiyosaki", price: 15, category: "Business", image: "c:\\Users\\HP\\Desktop\\Images\\Images\\jack.png" },
+        { id: 4, title: "The Great Gatsby", author: "F. Scott Fitzgerald", price: 12.99, category: "Fiction", image: "c:\\Users\\HP\\Desktop\\Images\\Images\\Great.png" },
+        { id: 5, title: "1984", author: "George Orwell", price: 15.99, category: "Fiction", image: "c:\\Users\\HP\\Desktop\\Images\\Images\\84.png" },
+        { id: 6, title: "The Art of Computer Programming", author: "Donald Knuth", price: 99.99, category: "Technology", image: "c:\\Users\\HP\\Desktop\\Images\\Images\\Browse.png" },
+        { id: 7, title: "Clean Code 2", author: "Robert C. Martin", price: 29.99, category: "Technology", image: "c:\\Users\\HP\\Desktop\\Images\\Images\\jen.png" },
+        { id: 8, title: "The Lean Startup", author: "Eric Ries", price: 24.99, category: "Business", image: "c:\\Users\\HP\\Desktop\\Images\\Images\\bb.png" },
+        { id: 9, title: "Thinking, Fast and Slow", author: "Daniel Kahneman", price: 19.99, category: "Self-Help", image: "c:\\Users\\HP\\Desktop\\Images\\Images\\katy.png" },
+        { id: 10, title: "The Catcher in the Rye", author: "J.D. Salinger", price: 10.99, category: "Fiction", image: "c:\\Users\\HP\\Desktop\\Images\\Images\\addy.png" },
+        { id: 11, title: "Sapiens: A Brief History of Humankind", author: "Yuval Noah Harari", price: 18.99, category: "History", image: "c:\\Users\\HP\\Desktop\\Images\\Gold.PNG" },
+        { id: 12, title: "The Power of Habit", author: "Charles Duhigg", price: 14.99, category: "Self-Help", image: "c:\\Users\\HP\\Desktop\\Images\\Dan.jpg" },
+        { id: 13, title: "Educated", author: "Tara Westover", price: 16.99, category: "Biography", image: "c:\\Users\\HP\\Desktop\\Images\\Calvin_Harris.jpg" },
+        { id: 14, title: "Chhatrapati Shivaji Maharaj", author: "Shinde Ram", price: 40, category: "History", image: "c:\\Users\\HP\\Desktop\\Images\\King.png" },
+        { id: 15, title: "Hidden Hindu", author: "Vivek Joshi", price: 33, category: "Philosophy", image: "c:\\Users\\HP\\Desktop\\Images\\Images\\Hindu.png" },
+    ];
+
+    // Load managedBooks from localStorage, merge with defaultBooks (avoid duplicates by id)
+    let managedBooks = [];
+    const storedBooks = JSON.parse(localStorage.getItem('managedBooks')) || [];
+    const allBookIds = new Set();
+    // Add default books first
+    defaultBooks.forEach(book => {
+        managedBooks.push(book);
+        allBookIds.add(book.id);
+    });
+    // Add new books if not already present
+    storedBooks.forEach(book => {
+        if (!allBookIds.has(book.id)) {
+            managedBooks.push(book);
+            allBookIds.add(book.id);
+        }
+    });
+
+    // Cart logic
+    function addToCart(bookId) {
+        const book = managedBooks.find(b => b.id === bookId);
+        if (book) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(book);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${book.title} added to cart!`);
+        }
+    }
+
+    // Display all books
+    function displayBooks() {
+        const grid = document.getElementById('booksGrid');
+        grid.innerHTML = '';
+        managedBooks.forEach(book => {
+            grid.innerHTML += `
+                <div class="book-card">
+                    <h4>${book.title}</h4>
+                    <p>by ${book.author}</p>
+                    <p>Category: ${book.category}</p>
+                    <p>Price: $${book.price}</p>
+                    <button onclick="addToCart(${book.id})">Add to Cart</button>
+                    ${book.image ? `<img src="${book.image}" width="80">` : ''}
+                </div>
+            `;
+        });
+    }
+
+    // Filter books by search and category
+    function filterBooks() {
+        const search = document.getElementById('bookSearch').value.toLowerCase();
+        const category = document.getElementById('categoryFilter').value;
+
+        const filtered = managedBooks.filter(book => {
+            return (book.title.toLowerCase().includes(search) || book.author.toLowerCase().includes(search)) &&
+                   (category === '' || book.category === category);
+        });
+
+        const grid = document.getElementById('booksGrid');
+        grid.innerHTML = '';
+        filtered.forEach(book => {
+            grid.innerHTML += `
+                <div class="book-card">
+                    <h4>${book.title}</h4>
+                    <p>by ${book.author}</p>
+                    <p>Category: ${book.category}</p>
+                    <p>Price: $${book.price}</p>
+                    <button onclick="addToCart(${book.id})">Add to Cart</button>
+                    ${book.image ? `<img src="${book.image}" width="80">` : ''}
+                </div>
+            `;
+        });
+    }
+
+    // Initial load (after Java2.js is loaded)
+    window.addEventListener('DOMContentLoaded', function() {
+        displayBooks();
+        if (typeof displayManageBooks === 'function') displayManageBooks();
+        if (typeof displaySellBooks === 'function') displaySellBooks();
+        if (typeof updateCart === 'function') updateCart();
+        if (typeof handleSignup === 'function') handleSignup();
+        if (typeof handleLogin === 'function') handleLogin();
+        if (typeof updateAccountStats === 'function') updateAccountStats();
+    });
+</script>
+
+<script src="Java2.js"></script>
+
+
+</body>
+</html>

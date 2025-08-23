@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      background: #667eea;
+      font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header, footer {
+      background: #f8f9fa;
+      padding: 1rem 0;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: left;
+      flex: 1;
+      margin-left: 1rem;
+    }
+
+    nav a {
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #764ba2;
+    }
+
+    .upload-area {
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px dashed #667eea;
+      border-radius: 10px;
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      margin: 2rem auto;
+      max-width: 400px;
+    }
+
+    .upload-area h3,
+    .upload-area p {
+      margin: 0.5rem 0;
+      color: #333;
+    }
+
+    #resumes {
+      margin: 2rem auto;
+      max-width: 1200px;
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+    }
+
+    .resume-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      justify-content: center;
+    }
+    .resume-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      width: calc(33.333% - 1rem);
+      min-width: 250px;
+      margin-bottom: 10px;
+      margin-top: 3px;
+      transition: transform 0.3s;
+      transform: translateY(0);
+      animation: alternate 0.5s ease-in-out infinite alternate;
+    }
+
+    .resume-card:hover {
+      transform: translateY(-30px);
+    }
+
+    form {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 400px;
+      margin: auto;
+      margin-bottom: 50px;
+    }
+
+    form label {
+      display: block;
+      text-align: left;
+      margin: 1rem 0 0.5rem;
+      color: #333;
+    }
+
+    form input {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 0.7rem 2rem;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #successGif {
+      margin-top: 1rem;
+      display: none;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #333;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+      }
+      .logo {
+        text-align: center;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <div class="logo">📚 BookHub</div>
+      <a href="Claude Book.html">Home</a>
+      <a href="Cart.html">Cart</a>
+      <a href="Sign.html">Sign In</a>
+      <a href="Books.html">Browse Books</a>
+      <a href="Selling.html">Sell Books</a>
+      <a href="Contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Success GIF -->
+  <div id="successGif">
+    <img src="https://media.giphy.com/media/111ebonMs90YLu/giphy.gif" alt="Success" style="width: 150px; height: auto;">
+    <p style="color: green; font-weight: bold;">✅ Resume uploaded successfully!</p>
+  </div>
+
+  <div class="upload-area" onclick="document.getElementById('resumeFile').click()">
+    <h3>📄 Upload Your Resume</h3>
+    <p>Click here or drag and drop your resume file</p>
+    <input type="file" id="resumeFile" accept=".pdf" style="display: none;" onchange="handleResumeUpload(event)">
+  </div>
+
+
+   <!-- Resume Templates Page -->
+    <h1 style="color: #f8f9fa;">Resume Templates</h1>
+    <p style="color: #f8f9fa;">Choose from a variety of resume templates to create your perfect resume.</p>
+    <section id="resumes" class="page">
+      <a href="https://flowcv.com/" target="_blank" style="text-decoration: none; color: inherit;">
+      <h2>Resume Templates</h2>
+      <div class="resume-container">
+        <div class="resume-card"><i class="fas fa-file-alt resume-icon"></i>
+           <img src="c:\Users\HP\Desktop\Images\Images\perkins.png" style="width: 200px;height: 150px;" alt="Resume template cover" class="card-img-sm" />
+          <h3>Template 1</h3>
+          <p>Basic Templates.</p>
+        </div>
+        </a>
+
+         <a href="https://flowcv.com/" target="_blank" style="text-decoration: none; color: inherit;">
+        <div class="resume-card"><i class="fas fa-file-contract resume-icon"></i>
+           <img src="c:\Users\HP\Desktop\Images\Images\bb.png" style="width: 200px;height: 150px;" alt="Resume template cover" class="card-img-sm"/>
+          <h3>Template 2</h3>
+          <p>Great for creative professionals.</p>
+        </div>
+        </a>
+
+         <a href="https://flowcv.com/" target="_blank" style="text-decoration: none; color: inherit;">
+        <div class="resume-card"><i class="fas fa-file-invoice resume-icon"></i>
+           <img src="c:\Users\HP\Desktop\Images\Images\jack.png" style="width: 200px;height: 150px;" alt="Resume template cover" class="card-img-sm"/>
+          <h3>Template 3</h3><p>Modern layout focusing on skills.</p>
+        </div>
+        </a>
+      </div>
+    </section>
+
+  <form id="requirementsForm" onsubmit="submitRequirements(event)">
+    <h3 style="color: black;">Fill in Your Job Preferences</h3>
+
+    <label>Desired Job Role:</label>
+    <input type="text" id="jobRole" required>
+
+    <label>Key Skills:</label>
+    <input type="text" id="skills" required>
+
+    <label>Years of Experience:</label>
+    <input type="number" id="experience" required>
+
+    <label>Name:</label>
+    <input type="text" id="name" required>
+
+    <label>Email:</label>
+    <input type="email" id="email" required>
+
+    <button type="submit">Submit Requirements</button>
+  </form>
+
+  <footer>
+    <p>&copy; 2023 Online Books Resume Store</p>
+  </footer>
+
+  <script>
+    // Handle Resume Upload
+    function handleResumeUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const isPdf = file.type === "application/pdf";
+
+      if (!isPdf) {
+        alert("❌ Only PDF files are allowed!");
+        return;
+      }
+
+      // Store file name (simulating upload)
+      const resumes = JSON.parse(localStorage.getItem('uploadedResumes')) || [];
+      resumes.push(file.name);
+      localStorage.setItem('uploadedResumes', JSON.stringify(resumes));
+
+      // Show GIF
+      document.getElementById('successGif').style.display = 'block';
+    }
+
+    // Handle Form Submission
+    function submitRequirements(event) {
+      event.preventDefault();
+
+      const jobRole = document.getElementById('jobRole').value.trim();
+      const skills = document.getElementById('skills').value.trim();
+      const experience = document.getElementById('experience').value.trim();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+
+      const formData = { jobRole, skills, experience, name, email };
+      localStorage.setItem('jobPreferences', JSON.stringify(formData));
+
+      alert("✅ Preferences submitted successfully!");
+      document.getElementById('requirementsForm').reset();
+    }
+  </script>
+</body>
+</html>
